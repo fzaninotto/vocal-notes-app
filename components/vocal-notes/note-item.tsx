@@ -8,7 +8,7 @@ interface VocalNote {
   duration: number
   createdAt: string
   title: string
-  status: "pending" | "processed" | "error"
+  status: "pending" | "transcribing" | "extracting" | "success" | "error"
   transcription?: string
 }
 
@@ -57,21 +57,25 @@ export function NoteItem({
         <div className="flex items-center gap-2 shrink-0">
           <Badge
             variant={
-              note.status === "processed"
+              note.status === "success"
                 ? "default"
                 : note.status === "error"
                 ? "destructive"
                 : "secondary"
             }
             className={
-              note.status === "processed"
+              note.status === "success"
                 ? "bg-green-100 text-green-800 hover:bg-green-100"
                 : note.status === "error"
                 ? ""
+                : note.status === "transcribing"
+                ? "bg-blue-100 text-blue-800 hover:bg-blue-100"
+                : note.status === "extracting"
+                ? "bg-purple-100 text-purple-800 hover:bg-purple-100"
                 : "bg-yellow-100 text-yellow-800 hover:bg-yellow-100"
             }
           >
-            {note.status}
+            {note.status === "success" ? "processed" : note.status}
           </Badge>
 
           <Button

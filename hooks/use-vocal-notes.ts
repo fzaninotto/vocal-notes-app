@@ -8,7 +8,7 @@ interface VocalNote {
   duration: number
   createdAt: string
   title: string
-  status: "pending" | "processed" | "error"
+  status: "pending" | "transcribing" | "extracting" | "success" | "error"
   transcription?: string
 }
 
@@ -26,6 +26,7 @@ export function useVocalNotes() {
     healthy: false,
     openaiConfigured: false,
   })
+  const [propertyDescription, setPropertyDescription] = useState<any>(null)
 
   const audioElementsRef = useRef<{ [key: string]: HTMLAudioElement }>({})
   const pollingIntervalRef = useRef<NodeJS.Timeout | null>(null)
@@ -54,6 +55,9 @@ export function useVocalNotes() {
       try {
         const data = JSON.parse(text)
         setNotes(data.notes || [])
+        if (data.property) {
+          setPropertyDescription(data.property)
+        }
       } catch (parseError) {
         console.error("JSON parse error:", parseError)
         console.error("Response text:", text)
@@ -105,20 +109,36 @@ export function useVocalNotes() {
         prev.map((note) => (note.id === data.note.id ? data.note : note))
       )
 
-      if (data.note.status === "processed") {
+      if (data.note.status === "transcribing") {
         toast({
-          title: "Transcription complete",
-          description: "Your voice note has been transcribed successfully.",
+          title: "Transcribing...",
+          description: "Converting your voice note to text.",
+        })
+      } else if (data.note.status === "extracting") {
+        toast({
+          title: "Extracting property info...",
+          description: "Analyzing the transcription for property details.",
+        })
+      } else if (data.note.status === "success") {
+        toast({
+          title: "Processing complete",
+          description: "Your voice note has been processed successfully.",
         })
       } else if (data.note.status === "error") {
         toast({
-          title: "Transcription failed",
+          title: "Processing failed",
           description: "There was an error processing your voice note.",
           variant: "destructive",
         })
       }
     } else if (data.type === "note_deleted") {
       setNotes((prev) => prev.filter((note) => note.id !== data.noteId))
+    } else if (data.type === "property_updated") {
+      setPropertyDescription(data.property)
+      toast({
+        title: "Property information updated",
+        description: "Extracted new details from your recording.",
+      })
     }
   }, [toast])
 
@@ -308,5 +328,6 @@ export function useVocalNotes() {
     uploadRecording,
     playNote,
     deleteNote,
+    propertyDescription,
   }
 }
