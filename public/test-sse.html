@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>SSE Test</title>
+</head>
+<body>
+    <h1>SSE Test Page</h1>
+    <button onclick="testSSE()">Test SSE</button>
+    <button onclick="testMainSSE()">Test Main SSE Endpoint</button>
+    <div id="messages"></div>
+    
+    <script>
+        function testSSE() {
+            const messagesDiv = document.getElementById('messages');
+            messagesDiv.innerHTML += '<p>Testing simple SSE endpoint...</p>';
+            
+            const eventSource = new EventSource('/api/test-sse');
+            
+            eventSource.onopen = () => {
+                messagesDiv.innerHTML += '<p style="color: green;">Simple SSE connected!</p>';
+            };
+            
+            eventSource.onmessage = (event) => {
+                messagesDiv.innerHTML += '<p>Message: ' + event.data + '</p>';
+            };
+            
+            eventSource.onerror = (error) => {
+                messagesDiv.innerHTML += '<p style="color: red;">Simple SSE error!</p>';
+                console.error('SSE error:', error);
+            };
+        }
+        
+        function testMainSSE() {
+            const messagesDiv = document.getElementById('messages');
+            messagesDiv.innerHTML += '<p>Testing main SSE endpoint...</p>';
+            
+            const eventSource = new EventSource('/api/notes/events');
+            
+            eventSource.onopen = () => {
+                messagesDiv.innerHTML += '<p style="color: green;">Main SSE connected!</p>';
+            };
+            
+            eventSource.onmessage = (event) => {
+                messagesDiv.innerHTML += '<p>Main Message: ' + event.data + '</p>';
+            };
+            
+            eventSource.onerror = (error) => {
+                messagesDiv.innerHTML += '<p style="color: red;">Main SSE error!</p>';
+                console.error('Main SSE error:', error);
+            };
+            
+            // Check connections after 1 second
+            setTimeout(() => {
+                fetch('/api/debug/sse')
+                    .then(res => res.json())
+                    .then(data => {
+                        messagesDiv.innerHTML += '<p>Active connections: ' + data.connections + '</p>';
+                    });
+            }, 1000);
+        }
+    </script>
+</body>
+</html>
