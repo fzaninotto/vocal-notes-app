@@ -73,7 +73,7 @@ export function PropertyDescription({ property }: PropertyDescriptionProps) {
           {property.description && (
             <div className={cn(
               "rounded-lg p-2 -m-2 transition-all duration-300",
-              updatedFields.description && "bg-yellow-100 animate-pulse"
+              updatedFields.description && "bg-yellow-100 animate-pulse [animation-iteration-count:2]"
             )}>
               <h3 className="font-semibold mb-2 text-base">Description</h3>
               <p className="text-sm text-muted-foreground">{property.description}</p>
@@ -84,7 +84,7 @@ export function PropertyDescription({ property }: PropertyDescriptionProps) {
             {property.livingArea && (
               <div className={cn(
                 "flex items-center gap-2 rounded-lg p-2 -m-2 transition-all duration-300",
-                updatedFields.livingArea && "bg-yellow-100 animate-pulse"
+                updatedFields.livingArea && "bg-yellow-100 animate-pulse [animation-iteration-count:2]"
               )}>
                 <Ruler className="h-4 w-4 text-muted-foreground" />
                 <span className="text-sm">
@@ -96,7 +96,7 @@ export function PropertyDescription({ property }: PropertyDescriptionProps) {
             {property.totalPlotArea && (
               <div className={cn(
                 "flex items-center gap-2 rounded-lg p-2 -m-2 transition-all duration-300",
-                updatedFields.totalPlotArea && "bg-yellow-100 animate-pulse"
+                updatedFields.totalPlotArea && "bg-yellow-100 animate-pulse [animation-iteration-count:2]"
               )}>
                 <Trees className="h-4 w-4 text-muted-foreground" />
                 <span className="text-sm">
@@ -108,7 +108,7 @@ export function PropertyDescription({ property }: PropertyDescriptionProps) {
             {property.yearOfConstruction && (
               <div className={cn(
                 "flex items-center gap-2 rounded-lg p-2 -m-2 transition-all duration-300",
-                updatedFields.yearOfConstruction && "bg-yellow-100 animate-pulse"
+                updatedFields.yearOfConstruction && "bg-yellow-100 animate-pulse [animation-iteration-count:2]"
               )}>
                 <Calendar className="h-4 w-4 text-muted-foreground" />
                 <span className="text-sm">
@@ -120,7 +120,7 @@ export function PropertyDescription({ property }: PropertyDescriptionProps) {
             {property.totalBedrooms !== undefined && (
               <div className={cn(
                 "flex items-center gap-2 rounded-lg p-2 -m-2 transition-all duration-300",
-                updatedFields.totalBedrooms && "bg-yellow-100 animate-pulse"
+                updatedFields.totalBedrooms && "bg-yellow-100 animate-pulse [animation-iteration-count:2]"
               )}>
                 <Home className="h-4 w-4 text-muted-foreground" />
                 <span className="text-sm">
@@ -132,7 +132,7 @@ export function PropertyDescription({ property }: PropertyDescriptionProps) {
             {property.totalBathrooms !== undefined && (
               <div className={cn(
                 "flex items-center gap-2 rounded-lg p-2 -m-2 transition-all duration-300",
-                updatedFields.totalBathrooms && "bg-yellow-100 animate-pulse"
+                updatedFields.totalBathrooms && "bg-yellow-100 animate-pulse [animation-iteration-count:2]"
               )}>
                 <Home className="h-4 w-4 text-muted-foreground" />
                 <span className="text-sm">
@@ -144,7 +144,7 @@ export function PropertyDescription({ property }: PropertyDescriptionProps) {
             {property.overallCondition && (
               <div className={cn(
                 "flex items-center gap-2 rounded-lg p-2 -m-2 transition-all duration-300",
-                updatedFields.overallCondition && "bg-yellow-100 animate-pulse"
+                updatedFields.overallCondition && "bg-yellow-100 animate-pulse [animation-iteration-count:2]"
               )}>
                 <Info className="h-4 w-4 text-muted-foreground" />
                 <Badge variant="outline" className="text-xs">
@@ -157,7 +157,7 @@ export function PropertyDescription({ property }: PropertyDescriptionProps) {
           {property.address && (
             <div className={cn(
               "rounded-lg p-2 -m-2 transition-all duration-300",
-              updatedFields.address && "bg-yellow-100 animate-pulse"
+              updatedFields.address && "bg-yellow-100 animate-pulse [animation-iteration-count:2]"
             )}>
               <h3 className="font-semibold mb-2 flex items-center gap-2 text-base">
                 <MapPin className="h-4 w-4" />
@@ -177,7 +177,7 @@ export function PropertyDescription({ property }: PropertyDescriptionProps) {
         {/* Property Details Section */}
         <div className={cn(
           "rounded-lg p-3 -m-3 transition-all duration-300",
-          updatedFields.propertyDetails && "bg-yellow-100 animate-pulse"
+          updatedFields.propertyDetails && "bg-yellow-100 animate-pulse [animation-iteration-count:2]"
         )}>
           <h3 className="font-semibold mb-3 flex items-center gap-2 text-base">
             <Building className="h-4 w-4" />
@@ -234,7 +234,7 @@ export function PropertyDescription({ property }: PropertyDescriptionProps) {
             <Separator />
             <div className={cn(
               "rounded-lg p-3 -m-3 transition-all duration-300",
-              updatedFields.energy && "bg-yellow-100 animate-pulse"
+              updatedFields.energy && "bg-yellow-100 animate-pulse [animation-iteration-count:2]"
             )}>
               <h3 className="font-semibold mb-3 flex items-center gap-2 text-base">
                 <Flame className="h-4 w-4" />
@@ -330,7 +330,7 @@ export function PropertyDescription({ property }: PropertyDescriptionProps) {
             <Separator />
             <div className={cn(
               "rounded-lg p-3 -m-3 transition-all duration-300",
-              updatedFields.rooms && "bg-yellow-100 animate-pulse"
+              updatedFields.rooms && "bg-yellow-100 animate-pulse [animation-iteration-count:2]"
             )}>
               <h3 className="font-semibold mb-3 flex items-center gap-2 text-base">
                 <Home className="h-4 w-4" />
@@ -340,7 +340,7 @@ export function PropertyDescription({ property }: PropertyDescriptionProps) {
                 {property.rooms.map((room: any, index: number) => (
                   <div key={index} className={cn(
                     "border rounded-lg p-3 transition-all duration-300",
-                    updatedFields[`room-${index}`] ? "bg-yellow-200 animate-pulse" : "bg-muted/30"
+                    updatedFields[`room-${index}`] ? "bg-yellow-200 animate-pulse [animation-iteration-count:2]" : "bg-muted/30"
                   )}>
                     <div className="flex justify-between items-start mb-2">
                       <div className="flex items-center gap-2">
@@ -381,7 +381,7 @@ export function PropertyDescription({ property }: PropertyDescriptionProps) {
             <Separator />
             <div className={cn(
               "rounded-lg p-3 -m-3 transition-all duration-300",
-              updatedFields.kitchen && "bg-yellow-100 animate-pulse"
+              updatedFields.kitchen && "bg-yellow-100 animate-pulse [animation-iteration-count:2]"
             )}>
               <h3 className="font-semibold mb-3 flex items-center gap-2 text-base">
                 <Wrench className="h-4 w-4" />
@@ -419,7 +419,7 @@ export function PropertyDescription({ property }: PropertyDescriptionProps) {
             <Separator />
             <div className={cn(
               "rounded-lg p-3 -m-3 transition-all duration-300",
-              updatedFields.outdoorSpaces && "bg-yellow-100 animate-pulse"
+              updatedFields.outdoorSpaces && "bg-yellow-100 animate-pulse [animation-iteration-count:2]"
             )}>
               <h3 className="font-semibold mb-3 flex items-center gap-2 text-base">
                 <Trees className="h-4 w-4" />
@@ -459,7 +459,7 @@ export function PropertyDescription({ property }: PropertyDescriptionProps) {
             <Separator />
             <div className={cn(
               "rounded-lg p-3 -m-3 transition-all duration-300",
-              updatedFields.parking && "bg-yellow-100 animate-pulse"
+              updatedFields.parking && "bg-yellow-100 animate-pulse [animation-iteration-count:2]"
             )}>
               <h3 className="font-semibold mb-3 flex items-center gap-2 text-base">
                 <Car className="h-4 w-4" />
@@ -489,7 +489,7 @@ export function PropertyDescription({ property }: PropertyDescriptionProps) {
             <Separator />
             <div className={cn(
               "rounded-lg p-3 -m-3 transition-all duration-300",
-              (updatedFields.amenities || updatedFields.additionalFeatures) && "bg-yellow-100 animate-pulse"
+              (updatedFields.amenities || updatedFields.additionalFeatures) && "bg-yellow-100 animate-pulse [animation-iteration-count:2]"
             )}>
               <h3 className="font-semibold mb-3 text-base">Additional Features</h3>
               {property.amenities && property.amenities.length > 0 && (
