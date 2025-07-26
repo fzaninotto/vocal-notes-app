@@ -1,8 +1,7 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { ScrollArea } from "@/components/ui/scroll-area"
-import { Home, MapPin, Euro, Ruler, Calendar, Flame, Zap, Info } from "lucide-react"
+import { Separator } from "@/components/ui/separator"
+import { Home, MapPin, Euro, Ruler, Calendar, Flame, Zap, Info, Building, Trees, Car, Wrench } from "lucide-react"
 
 interface PropertyDescriptionProps {
   property: any | null
@@ -65,119 +64,170 @@ export function PropertyDescription({ property }: PropertyDescriptionProps) {
           )}
         </div>
       </CardHeader>
-      <CardContent>
-        <Tabs defaultValue="overview" className="w-full">
-          <TabsList className="grid w-full grid-cols-4">
-            <TabsTrigger value="overview">Overview</TabsTrigger>
-            <TabsTrigger value="details">Details</TabsTrigger>
-            <TabsTrigger value="rooms">Rooms</TabsTrigger>
-            <TabsTrigger value="features">Features</TabsTrigger>
-          </TabsList>
-
-          <TabsContent value="overview" className="space-y-4">
-            {property.description && (
-              <div>
-                <h3 className="font-semibold mb-2">Description</h3>
-                <p className="text-sm text-muted-foreground">{property.description}</p>
-              </div>
-            )}
-
-            <div className="grid grid-cols-2 gap-4">
-              {property.livingArea && (
-                <div className="flex items-center gap-2">
-                  <Ruler className="h-4 w-4 text-muted-foreground" />
-                  <span className="text-sm">
-                    <strong>{property.livingArea}</strong> m² living area
-                  </span>
-                </div>
-              )}
-
-              {property.totalPlotArea && (
-                <div className="flex items-center gap-2">
-                  <MapPin className="h-4 w-4 text-muted-foreground" />
-                  <span className="text-sm">
-                    <strong>{property.totalPlotArea}</strong> m² plot
-                  </span>
-                </div>
-              )}
-
-              {property.yearOfConstruction && (
-                <div className="flex items-center gap-2">
-                  <Calendar className="h-4 w-4 text-muted-foreground" />
-                  <span className="text-sm">
-                    Built in <strong>{property.yearOfConstruction}</strong>
-                  </span>
-                </div>
-              )}
-
-              {property.totalBedrooms !== undefined && (
-                <div className="flex items-center gap-2">
-                  <Home className="h-4 w-4 text-muted-foreground" />
-                  <span className="text-sm">
-                    <strong>{property.totalBedrooms}</strong> bedrooms
-                  </span>
-                </div>
-              )}
+      <CardContent className="space-y-6">
+        {/* Overview Section */}
+        <div className="space-y-4">
+          {property.description && (
+            <div>
+              <h3 className="font-semibold mb-2 text-base">Description</h3>
+              <p className="text-sm text-muted-foreground">{property.description}</p>
             </div>
+          )}
 
-            {property.address && (
-              <div>
-                <h3 className="font-semibold mb-2 flex items-center gap-2">
-                  <MapPin className="h-4 w-4" />
-                  Location
-                </h3>
-                <p className="text-sm text-muted-foreground">
-                  {property.address.street && `${property.address.street}, `}
-                  {property.address.postalCode} {property.address.city}
-                  {property.address.country && `, ${property.address.country}`}
-                </p>
+          <div className="grid grid-cols-2 gap-4">
+            {property.livingArea && (
+              <div className="flex items-center gap-2">
+                <Ruler className="h-4 w-4 text-muted-foreground" />
+                <span className="text-sm">
+                  <strong>{property.livingArea}</strong> m² living area
+                </span>
               </div>
             )}
-          </TabsContent>
 
-          <TabsContent value="details" className="space-y-4">
-            <ScrollArea className="h-[300px]">
-              <div className="space-y-3">
-                {property.overallCondition && (
-                  <div className="flex justify-between">
-                    <span className="text-sm text-muted-foreground">Condition</span>
-                    <Badge variant="outline">{property.overallCondition.replace(/_/g, ' ')}</Badge>
-                  </div>
-                )}
+            {property.totalPlotArea && (
+              <div className="flex items-center gap-2">
+                <Trees className="h-4 w-4 text-muted-foreground" />
+                <span className="text-sm">
+                  <strong>{property.totalPlotArea}</strong> m² plot
+                </span>
+              </div>
+            )}
 
-                {property.numberOfFloorsInBuilding && (
-                  <div className="flex justify-between">
-                    <span className="text-sm text-muted-foreground">Total floors</span>
-                    <span className="text-sm font-medium">{property.numberOfFloorsInBuilding}</span>
-                  </div>
-                )}
+            {property.yearOfConstruction && (
+              <div className="flex items-center gap-2">
+                <Calendar className="h-4 w-4 text-muted-foreground" />
+                <span className="text-sm">
+                  Built in <strong>{property.yearOfConstruction}</strong>
+                </span>
+              </div>
+            )}
 
-                {property.propertyFloorLevel !== undefined && (
-                  <div className="flex justify-between">
-                    <span className="text-sm text-muted-foreground">Floor level</span>
-                    <span className="text-sm font-medium">{property.propertyFloorLevel}</span>
-                  </div>
-                )}
+            {property.totalBedrooms !== undefined && (
+              <div className="flex items-center gap-2">
+                <Home className="h-4 w-4 text-muted-foreground" />
+                <span className="text-sm">
+                  <strong>{property.totalBedrooms}</strong> bedrooms
+                </span>
+              </div>
+            )}
 
-                {property.hasElevator !== undefined && (
-                  <div className="flex justify-between">
-                    <span className="text-sm text-muted-foreground">Elevator</span>
-                    <span className="text-sm font-medium">{property.hasElevator ? 'Yes' : 'No'}</span>
-                  </div>
-                )}
+            {property.totalBathrooms !== undefined && (
+              <div className="flex items-center gap-2">
+                <Home className="h-4 w-4 text-muted-foreground" />
+                <span className="text-sm">
+                  <strong>{property.totalBathrooms}</strong> bathrooms
+                </span>
+              </div>
+            )}
 
+            {property.overallCondition && (
+              <div className="flex items-center gap-2">
+                <Info className="h-4 w-4 text-muted-foreground" />
+                <Badge variant="outline" className="text-xs">
+                  {property.overallCondition.replace(/_/g, ' ')}
+                </Badge>
+              </div>
+            )}
+          </div>
+
+          {property.address && (
+            <div>
+              <h3 className="font-semibold mb-2 flex items-center gap-2 text-base">
+                <MapPin className="h-4 w-4" />
+                Location
+              </h3>
+              <p className="text-sm text-muted-foreground">
+                {property.address.street && `${property.address.street}, `}
+                {property.address.postalCode} {property.address.city}
+                {property.address.country && `, ${property.address.country}`}
+              </p>
+            </div>
+          )}
+        </div>
+
+        <Separator />
+
+        {/* Property Details Section */}
+        <div>
+          <h3 className="font-semibold mb-3 flex items-center gap-2 text-base">
+            <Building className="h-4 w-4" />
+            Property Details
+          </h3>
+          <div className="grid grid-cols-2 gap-y-3 gap-x-6 text-sm">
+            {property.numberOfFloorsInBuilding && (
+              <div className="flex justify-between">
+                <span className="text-muted-foreground">Total floors</span>
+                <span className="font-medium">{property.numberOfFloorsInBuilding}</span>
+              </div>
+            )}
+
+            {property.propertyFloorLevel !== undefined && (
+              <div className="flex justify-between">
+                <span className="text-muted-foreground">Floor level</span>
+                <span className="font-medium">{property.propertyFloorLevel}</span>
+              </div>
+            )}
+
+            {property.hasElevator !== undefined && (
+              <div className="flex justify-between">
+                <span className="text-muted-foreground">Elevator</span>
+                <span className="font-medium">{property.hasElevator ? 'Yes' : 'No'}</span>
+              </div>
+            )}
+
+            {property.lastRenovationYear && (
+              <div className="flex justify-between">
+                <span className="text-muted-foreground">Last renovation</span>
+                <span className="font-medium">{property.lastRenovationYear}</span>
+              </div>
+            )}
+
+            {property.annualPropertyTax && (
+              <div className="flex justify-between">
+                <span className="text-muted-foreground">Annual tax</span>
+                <span className="font-medium">€{property.annualPropertyTax}</span>
+              </div>
+            )}
+
+            {property.condominiumFees && (
+              <div className="flex justify-between">
+                <span className="text-muted-foreground">Monthly fees</span>
+                <span className="font-medium">€{property.condominiumFees}</span>
+              </div>
+            )}
+          </div>
+        </div>
+
+        {/* Energy & Heating Section */}
+        {(property.heating || property.energyPerformance || property.windows) && (
+          <>
+            <Separator />
+            <div>
+              <h3 className="font-semibold mb-3 flex items-center gap-2 text-base">
+                <Flame className="h-4 w-4" />
+                Energy & Climate
+              </h3>
+              <div className="grid grid-cols-2 gap-y-3 gap-x-6 text-sm">
                 {property.heating && (
                   <>
-                    <div className="flex justify-between">
-                      <span className="text-sm text-muted-foreground">Heating type</span>
-                      <Badge variant="outline">{property.heating.mainType}</Badge>
-                    </div>
-                    <div className="flex justify-between">
-                      <span className="text-sm text-muted-foreground">Air conditioning</span>
-                      <span className="text-sm font-medium">
-                        {property.heating.hasAirConditioning ? 'Yes' : 'No'}
-                      </span>
-                    </div>
+                    {property.heating.mainType && (
+                      <div className="flex justify-between">
+                        <span className="text-muted-foreground">Heating type</span>
+                        <Badge variant="outline" className="text-xs">{property.heating.mainType}</Badge>
+                      </div>
+                    )}
+                    {property.heating.distribution && (
+                      <div className="flex justify-between">
+                        <span className="text-muted-foreground">Distribution</span>
+                        <span className="font-medium">{property.heating.distribution.replace(/_/g, ' ')}</span>
+                      </div>
+                    )}
+                    {property.heating.hasAirConditioning !== undefined && (
+                      <div className="flex justify-between">
+                        <span className="text-muted-foreground">Air conditioning</span>
+                        <span className="font-medium">{property.heating.hasAirConditioning ? 'Yes' : 'No'}</span>
+                      </div>
+                    )}
                   </>
                 )}
 
@@ -185,13 +235,10 @@ export function PropertyDescription({ property }: PropertyDescriptionProps) {
                   <>
                     {property.energyPerformance.dpeClass && (
                       <div className="flex justify-between items-center">
-                        <span className="text-sm text-muted-foreground flex items-center gap-1">
-                          <Zap className="h-3 w-3" />
-                          Energy class
-                        </span>
+                        <span className="text-muted-foreground">Energy class (DPE)</span>
                         <Badge 
                           variant="outline" 
-                          className={`
+                          className={`text-xs
                             ${property.energyPerformance.dpeClass <= 'B' ? 'bg-green-100 text-green-800' : ''}
                             ${property.energyPerformance.dpeClass >= 'E' ? 'bg-red-100 text-red-800' : ''}
                           `}
@@ -200,122 +247,216 @@ export function PropertyDescription({ property }: PropertyDescriptionProps) {
                         </Badge>
                       </div>
                     )}
+                    {property.energyPerformance.gesClass && (
+                      <div className="flex justify-between items-center">
+                        <span className="text-muted-foreground">GES class</span>
+                        <Badge 
+                          variant="outline" 
+                          className={`text-xs
+                            ${property.energyPerformance.gesClass <= 'B' ? 'bg-green-100 text-green-800' : ''}
+                            ${property.energyPerformance.gesClass >= 'E' ? 'bg-red-100 text-red-800' : ''}
+                          `}
+                        >
+                          {property.energyPerformance.gesClass}
+                        </Badge>
+                      </div>
+                    )}
+                    {property.energyPerformance.estimatedAnnualEnergyCost && (
+                      <div className="flex justify-between">
+                        <span className="text-muted-foreground">Est. annual energy cost</span>
+                        <span className="font-medium">€{property.energyPerformance.estimatedAnnualEnergyCost}</span>
+                      </div>
+                    )}
                   </>
                 )}
 
-                {property.annualPropertyTax && (
-                  <div className="flex justify-between">
-                    <span className="text-sm text-muted-foreground">Annual property tax</span>
-                    <span className="text-sm font-medium">€{property.annualPropertyTax}</span>
-                  </div>
+                {property.windows && (
+                  <>
+                    {property.windows.glazingType && (
+                      <div className="flex justify-between">
+                        <span className="text-muted-foreground">Window glazing</span>
+                        <span className="font-medium">{property.windows.glazingType} glazing</span>
+                      </div>
+                    )}
+                    {property.windows.frameMaterial && (
+                      <div className="flex justify-between">
+                        <span className="text-muted-foreground">Window frames</span>
+                        <span className="font-medium">{property.windows.frameMaterial}</span>
+                      </div>
+                    )}
+                  </>
                 )}
+              </div>
+            </div>
+          </>
+        )}
 
-                {property.condominiumFees && (
+        {/* Rooms Section */}
+        {property.rooms && property.rooms.length > 0 && (
+          <>
+            <Separator />
+            <div>
+              <h3 className="font-semibold mb-3 flex items-center gap-2 text-base">
+                <Home className="h-4 w-4" />
+                Rooms ({property.rooms.length})
+              </h3>
+              <div className="grid grid-cols-1 gap-3">
+                {property.rooms.map((room: any, index: number) => (
+                  <div key={index} className="border rounded-lg p-3 bg-muted/30">
+                    <div className="flex justify-between items-start mb-2">
+                      <div className="flex items-center gap-2">
+                        <Badge className="text-xs">{room.type.replace(/_/g, ' ')}</Badge>
+                        {room.surface && <span className="text-sm font-medium">{room.surface} m²</span>}
+                      </div>
+                      {room.floorLevel !== undefined && (
+                        <span className="text-xs text-muted-foreground">Floor {room.floorLevel}</span>
+                      )}
+                    </div>
+                    <div className="grid grid-cols-2 gap-2 text-xs text-muted-foreground">
+                      {room.floorCovering && (
+                        <div>Flooring: {room.floorCovering.toLowerCase()}</div>
+                      )}
+                      {room.exposition && room.exposition.length > 0 && (
+                        <div>Facing: {room.exposition.join(', ').toLowerCase()}</div>
+                      )}
+                    </div>
+                    {room.features && room.features.length > 0 && (
+                      <div className="mt-2 flex flex-wrap gap-1">
+                        {room.features.map((feature: string, idx: number) => (
+                          <Badge key={idx} variant="secondary" className="text-xs">
+                            {feature}
+                          </Badge>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                ))}
+              </div>
+            </div>
+          </>
+        )}
+
+        {/* Kitchen Section */}
+        {property.kitchen && (
+          <>
+            <Separator />
+            <div>
+              <h3 className="font-semibold mb-3 flex items-center gap-2 text-base">
+                <Wrench className="h-4 w-4" />
+                Kitchen
+              </h3>
+              <div className="grid grid-cols-2 gap-y-3 gap-x-6 text-sm">
+                <div className="flex justify-between">
+                  <span className="text-muted-foreground">Equipped</span>
+                  <span className="font-medium">{property.kitchen.isEquipped ? 'Yes' : 'No'}</span>
+                </div>
+                {property.kitchen.type && (
                   <div className="flex justify-between">
-                    <span className="text-sm text-muted-foreground">Monthly fees</span>
-                    <span className="text-sm font-medium">€{property.condominiumFees}</span>
+                    <span className="text-muted-foreground">Type</span>
+                    <span className="font-medium">{property.kitchen.type.replace(/_/g, ' ')}</span>
                   </div>
                 )}
               </div>
-            </ScrollArea>
-          </TabsContent>
-
-          <TabsContent value="rooms" className="space-y-4">
-            <ScrollArea className="h-[300px]">
-              {property.rooms && property.rooms.length > 0 ? (
-                <div className="space-y-3">
-                  {property.rooms.map((room: any, index: number) => (
-                    <div key={index} className="border rounded-lg p-3">
-                      <div className="flex justify-between items-start mb-2">
-                        <Badge>{room.type.replace(/_/g, ' ')}</Badge>
-                        <span className="text-sm font-medium">{room.surface} m²</span>
-                      </div>
-                      <div className="text-xs text-muted-foreground space-y-1">
-                        <div>Floor: {room.floorLevel}</div>
-                        {room.floorCovering && <div>Flooring: {room.floorCovering}</div>}
-                        {room.exposition && room.exposition.length > 0 && (
-                          <div>Facing: {room.exposition.join(', ')}</div>
-                        )}
-                        {room.features && room.features.length > 0 && (
-                          <div>Features: {room.features.join(', ')}</div>
-                        )}
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              ) : (
-                <div className="text-center py-8 text-muted-foreground">
-                  No room details available yet
+              {property.kitchen.appliances && property.kitchen.appliances.length > 0 && (
+                <div className="mt-3">
+                  <span className="text-sm text-muted-foreground">Appliances:</span>
+                  <div className="flex flex-wrap gap-1 mt-1">
+                    {property.kitchen.appliances.map((appliance: string, index: number) => (
+                      <Badge key={index} variant="secondary" className="text-xs">{appliance}</Badge>
+                    ))}
+                  </div>
                 </div>
               )}
-            </ScrollArea>
-          </TabsContent>
+            </div>
+          </>
+        )}
 
-          <TabsContent value="features" className="space-y-4">
-            <ScrollArea className="h-[300px]">
-              <div className="space-y-4">
-                {property.kitchen && (
-                  <div>
-                    <h4 className="font-semibold mb-2">Kitchen</h4>
-                    <div className="space-y-1 text-sm">
-                      <div>Equipped: {property.kitchen.isEquipped ? 'Yes' : 'No'}</div>
-                      {property.kitchen.type && <div>Type: {property.kitchen.type.replace(/_/g, ' ')}</div>}
-                      {property.kitchen.appliances && property.kitchen.appliances.length > 0 && (
-                        <div>Appliances: {property.kitchen.appliances.join(', ')}</div>
+        {/* Outdoor Spaces Section */}
+        {property.outdoorSpaces && property.outdoorSpaces.length > 0 && (
+          <>
+            <Separator />
+            <div>
+              <h3 className="font-semibold mb-3 flex items-center gap-2 text-base">
+                <Trees className="h-4 w-4" />
+                Outdoor Spaces
+              </h3>
+              <div className="grid grid-cols-1 gap-3">
+                {property.outdoorSpaces.map((space: any, index: number) => (
+                  <div key={index} className="border rounded-lg p-3 bg-muted/30">
+                    <div className="flex justify-between items-start mb-2">
+                      <Badge className="text-xs">{space.type}</Badge>
+                      <span className="text-sm font-medium">{space.surface} m²</span>
+                    </div>
+                    <div className="grid grid-cols-2 gap-2 text-xs text-muted-foreground">
+                      {space.isFenced !== undefined && (
+                        <div>Fenced: {space.isFenced ? 'Yes' : 'No'}</div>
+                      )}
+                      {space.hasPool !== undefined && (
+                        <div>Pool: {space.hasPool ? 'Yes' : 'No'}</div>
+                      )}
+                      {space.poolDimensions && (
+                        <div>Pool size: {space.poolDimensions}</div>
+                      )}
+                      {space.orientation && space.orientation.length > 0 && (
+                        <div>Orientation: {space.orientation.join(', ').toLowerCase()}</div>
                       )}
                     </div>
                   </div>
-                )}
+                ))}
+              </div>
+            </div>
+          </>
+        )}
 
-                {property.parking && property.parking.hasParking && (
-                  <div>
-                    <h4 className="font-semibold mb-2">Parking</h4>
-                    <div className="space-y-1 text-sm">
-                      {property.parking.type && <div>Type: {property.parking.type.replace(/_/g, ' ')}</div>}
-                      {property.parking.numberOfSpaces && <div>Spaces: {property.parking.numberOfSpaces}</div>}
-                    </div>
+        {/* Parking Section */}
+        {property.parking && property.parking.hasParking && (
+          <>
+            <Separator />
+            <div>
+              <h3 className="font-semibold mb-3 flex items-center gap-2 text-base">
+                <Car className="h-4 w-4" />
+                Parking
+              </h3>
+              <div className="grid grid-cols-2 gap-y-3 gap-x-6 text-sm">
+                {property.parking.type && (
+                  <div className="flex justify-between">
+                    <span className="text-muted-foreground">Type</span>
+                    <span className="font-medium">{property.parking.type.replace(/_/g, ' ')}</span>
                   </div>
                 )}
-
-                {property.outdoorSpaces && property.outdoorSpaces.length > 0 && (
-                  <div>
-                    <h4 className="font-semibold mb-2">Outdoor Spaces</h4>
-                    <div className="space-y-2">
-                      {property.outdoorSpaces.map((space: any, index: number) => (
-                        <div key={index} className="text-sm">
-                          <Badge variant="outline" className="mb-1">{space.type}</Badge>
-                          <div className="ml-2 space-y-1 text-xs text-muted-foreground">
-                            <div>Area: {space.surface} m²</div>
-                            {space.hasPool && <div>Swimming pool: Yes</div>}
-                            {space.isFenced && <div>Fenced: Yes</div>}
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                )}
-
-                {property.amenities && property.amenities.length > 0 && (
-                  <div>
-                    <h4 className="font-semibold mb-2">Amenities</h4>
-                    <div className="flex flex-wrap gap-2">
-                      {property.amenities.map((amenity: string, index: number) => (
-                        <Badge key={index} variant="secondary">{amenity}</Badge>
-                      ))}
-                    </div>
-                  </div>
-                )}
-
-                {property.hasCellar && (
-                  <div className="flex items-center gap-2">
-                    <Info className="h-4 w-4 text-muted-foreground" />
-                    <span className="text-sm">Includes cellar storage</span>
+                {property.parking.numberOfSpaces && (
+                  <div className="flex justify-between">
+                    <span className="text-muted-foreground">Spaces</span>
+                    <span className="font-medium">{property.parking.numberOfSpaces}</span>
                   </div>
                 )}
               </div>
-            </ScrollArea>
-          </TabsContent>
-        </Tabs>
+            </div>
+          </>
+        )}
+
+        {/* Additional Features Section */}
+        {(property.amenities && property.amenities.length > 0) || property.hasCellar && (
+          <>
+            <Separator />
+            <div>
+              <h3 className="font-semibold mb-3 text-base">Additional Features</h3>
+              {property.amenities && property.amenities.length > 0 && (
+                <div className="flex flex-wrap gap-2 mb-3">
+                  {property.amenities.map((amenity: string, index: number) => (
+                    <Badge key={index} variant="secondary">{amenity}</Badge>
+                  ))}
+                </div>
+              )}
+              {property.hasCellar && (
+                <div className="flex items-center gap-2 text-sm">
+                  <Info className="h-4 w-4 text-muted-foreground" />
+                  <span>Includes cellar storage</span>
+                </div>
+              )}
+            </div>
+          </>
+        )}
       </CardContent>
     </Card>
   )
