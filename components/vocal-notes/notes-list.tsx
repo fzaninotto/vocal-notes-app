@@ -1,24 +1,14 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Mic } from "lucide-react"
-import { NoteItem } from "./note-item"
-
-interface VocalNote {
-  id: string
-  audioUrl: string
-  duration: number
-  createdAt: string
-  title: string
-  status: "pending" | "processed" | "error"
-  transcription?: string
-}
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Mic, MessageSquareQuote } from "lucide-react";
+import { NoteItem, type VocalNote } from "./note-item";
 
 interface NotesListProps {
-  notes: VocalNote[]
-  playingNoteId: string | null
-  onPlayNote: (note: VocalNote) => void
-  onDeleteNote: (noteId: string) => void
-  formatTime: (seconds: number) => string
-  formatDate: (dateString: string) => string
+  notes: VocalNote[];
+  playingNoteId: string | null;
+  onPlayNote: (note: VocalNote) => void;
+  onDeleteNote: (noteId: string) => void;
+  formatTime: (seconds: number) => string;
+  formatDate: (dateString: string) => string;
 }
 
 export function NotesList({
@@ -27,12 +17,15 @@ export function NotesList({
   onPlayNote,
   onDeleteNote,
   formatTime,
-  formatDate
+  formatDate,
 }: NotesListProps) {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Your Notes ({notes.length})</CardTitle>
+        <CardTitle className="flex items-center gap-2">
+          <MessageSquareQuote className="h-5 w-5" />
+          Your Notes ({notes.length})
+        </CardTitle>
       </CardHeader>
       <CardContent>
         {notes.length === 0 ? (
@@ -57,5 +50,5 @@ export function NotesList({
         )}
       </CardContent>
     </Card>
-  )
+  );
 }

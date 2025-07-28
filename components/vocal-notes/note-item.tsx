@@ -1,33 +1,33 @@
-import { Button } from "@/components/ui/button"
-import { Badge } from "@/components/ui/badge"
-import { Play, Pause, Trash2 } from "lucide-react"
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { Play, Pause, Trash2 } from "lucide-react";
 
-interface VocalNote {
-  id: string
-  audioUrl: string
-  duration: number
-  createdAt: string
-  title: string
-  status: "pending" | "transcribing" | "extracting" | "success" | "error"
-  transcription?: string
+export interface VocalNote {
+  id: string;
+  audioUrl: string;
+  duration: number;
+  createdAt: string;
+  title: string;
+  status: "pending" | "transcribing" | "extracting" | "success" | "error";
+  transcription?: string;
 }
 
 interface NoteItemProps {
-  note: VocalNote
-  isPlaying: boolean
-  onPlay: () => void
-  onDelete: () => void
-  formatTime: (seconds: number) => string
-  formatDate: (dateString: string) => string
+  note: VocalNote;
+  isPlaying: boolean;
+  onPlay: () => void;
+  onDelete: () => void;
+  formatTime: (seconds: number) => string;
+  formatDate: (dateString: string) => string;
 }
 
-export function NoteItem({ 
-  note, 
-  isPlaying, 
-  onPlay, 
+export function NoteItem({
+  note,
+  isPlaying,
+  onPlay,
   onDelete,
   formatTime,
-  formatDate
+  formatDate,
 }: NoteItemProps) {
   return (
     <div className="border rounded-lg p-4 hover:bg-gray-50">
@@ -46,9 +46,7 @@ export function NoteItem({
         </Button>
 
         <div className="flex-1 min-w-0">
-          <div className="font-medium text-sm truncate">
-            {note.title}
-          </div>
+          <div className="font-medium text-sm truncate">{note.title}</div>
           <div className="text-xs text-gray-500 mb-2">
             {formatDate(note.createdAt)} • {formatTime(note.duration)}
           </div>
@@ -88,7 +86,7 @@ export function NoteItem({
           </Button>
         </div>
       </div>
-      
+
       {note.transcription && (
         <div className="mt-2">
           <div className="bg-gray-100 rounded p-2 text-sm">
@@ -98,5 +96,5 @@ export function NoteItem({
         </div>
       )}
     </div>
-  )
+  );
 }
