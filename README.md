@@ -2,6 +2,9 @@
 
 A voice recording application that automatically transcribes audio notes and extracts real estate property information using AI. Perfect for real estate agents who want to quickly capture property details during viewings.
 
+
+<img width="1225" height="934" alt="image" src="https://github.com/user-attachments/assets/5fd5b491-2465-478c-83cd-f1dbb4468ca5" />
+
 ## Features
 
 - 🎙️ **Voice Recording**: Record audio notes directly in the browser
