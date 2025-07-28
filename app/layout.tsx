@@ -1,12 +1,10 @@
-import type { Metadata } from "next";
 import { GeistSans } from "geist/font/sans";
 import { GeistMono } from "geist/font/mono";
 import "./globals.css";
 
-export const metadata: Metadata = {
-  title: "v0 App",
-  description: "Created with v0",
-  generator: "v0.dev",
+export const metadata = {
+  title: "Vocal Notes App",
+  description: "Fill in structured data for your audio recordings",
 };
 
 export default function RootLayout({
@@ -24,7 +22,8 @@ html {
   --font-mono: ${GeistMono.variable};
 }
         `}</style>
-        <title>Vocal Notes App</title>
+        <title>{metadata.title}</title>
+        <meta name="description" content={metadata.description} />
       </head>
       <body>{children}</body>
     </html>
